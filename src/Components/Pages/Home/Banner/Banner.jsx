@@ -14,7 +14,7 @@ const Banner = () => {
                     y: [5, -40, 20],  // Keyframes for bounce effect
                 }}
                 transition={{
-                    duration: 1,     // Duration of one complete cycle
+                    duration: 2,     // Duration of one complete cycle
                     repeat: Infinity, // Loop infinitely
                     ease: "easeInOut" // Easing function for smoother animation
                 }}/>
