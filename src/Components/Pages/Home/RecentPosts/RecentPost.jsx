@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 // import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-const RecentPost = ({img , title , description})=> {
+const RecentPost = ({recentpost})=> {
+    const {img , title , description} = recentpost
     return (
     <div className="card card-compact w-auto h-96 text-white  shadow-xl  mb-3 border-2  bg-gradient-to-r from-slate-900/50   to-sky-950/70 border-sky-300">
         <figure>
@@ -30,9 +31,8 @@ const RecentPost = ({img , title , description})=> {
 };
 
 RecentPost.propTypes = {
-    img : PropTypes.string,
-    title : PropTypes.string,
-    description : PropTypes.string
+    recentpost : PropTypes.object,
+    
 };
 
 export default RecentPost;
