@@ -10,17 +10,12 @@ import "../../CustomCss/custom-scrollbar.css"
 import Task from "./Tasks/Task";
 
 import useTaskComplete from "../../../Hooks/useTaskComplete";
+import useUserInfo from "../../../Hooks/useUserInfo";
 
 const EarnPoints = () => {
-    // -----------------------normal data fetching----------------------// 
-    // const [ alltasks, SetALLtasks] = useState([])
-    // const axiosSecure = useAxiosSecure()
     const [taskinfo] = useTaskComplete()
-    // useEffect(() => {
-    //     axiosSecure.get('/tasks')
-    //         .then(res => SetALLtasks(res.data))
+    const [userinfo] = useUserInfo()
 
-    // }, [axiosSecure])
     return (
         <div className="Earnbackgrnd">
             <Navber></Navber>
@@ -38,9 +33,9 @@ const EarnPoints = () => {
                             <img className="h-24 px-3" src={logo} alt="qumva" />
                             {/* point info */}
                             <div>
-                                <h1 className="text-xl md:text-2xl py-1"> Qumva Points</h1>
+                                <h1 className="text-xl md:text-2xl py-1"> Qumva Coins</h1>
                                 <h1 className="text-xl md:text-2xl">
-                                    0 Points
+                                    {userinfo[0]?.QumvaPoints} Coins
                                 </h1>
                             </div>
                         </div>

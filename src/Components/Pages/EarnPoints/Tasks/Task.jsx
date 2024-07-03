@@ -62,29 +62,31 @@ const Task = ({ singletask, index }) => {
                 <h1 className="text-xl md:text-2xl py-1 font-extrabold">Task {index + 1}</h1>
                 <h1 className="text-sm  md:text-lg py-1 font-bold">{title}</h1>
             </div>
-            {/* task complete btn */}
-            {!done ? (
-                <div className="flex gap-4 flex-row items-center">
+            {/* task complete btn & delete btn */}
+            <div className='flex flex-col gap-2 lg:flex-row-reverse'>
+                {!done ? (
+                    <div className="flex gap-4 flex-row items-center">
+                        <button className="px-5 py-3 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase">
+                            {points} Points
+                        </button>
+                        {/* arrow logo */}
+                        <a onClick={handlecompletask} target="_blank" href={twitter_link}>
+                            <div className="text-2xl md:text-4xl">
+                                <IoMdArrowDropright />
+                            </div>
+                        </a>
+                    </div>
+                ) : (
                     <button className="px-5 py-3 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase">
-                        {points} Points
+                        Completed
                     </button>
-                    {/* arrow logo */}
-                    <a onClick={handlecompletask} target="_blank" href={twitter_link}>
-                        <div className="text-2xl md:text-4xl">
-                            <IoMdArrowDropright />
-                        </div>
-                    </a>
-                </div>
-            ) : (
-                <button className="px-5 py-3 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase">
-                    Completed
-                </button>
-            )}
-            {
-                userinfo[0]?.userRole === 'admin' && <div className="card-actions justify-end">
-                    <button onClick={handleTaskDelete} className="px-5 py-3 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase">Delete</button>
-                </div>
-            }
+                )}
+                {
+                    userinfo[0]?.userRole === 'admin' && <div className="">
+                        <button onClick={handleTaskDelete} className="px-5 py-3 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase">Delete</button>
+                    </div>
+                }
+            </div>
             <ToastContainer></ToastContainer>
         </div>
     );
