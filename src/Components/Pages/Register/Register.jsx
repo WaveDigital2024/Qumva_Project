@@ -8,12 +8,12 @@ import Navber from '../../Shared/Navber/Navber';
 import { FcGoogle } from 'react-icons/fc';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Providers/Authproviders';
-// import { axiosSecure } from '../../../Hooks/useAxiosSecure';
-import axios from 'axios';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 const Register = () => {
     const { createUser, UpdateProfile, GoogleLogin } = useContext(AuthContext)
     const navigate = useNavigate()
+    const axiosSecure = useAxiosSecure()
     const handleRegister = e => {
 
         e.preventDefault()
@@ -37,7 +37,7 @@ const Register = () => {
 
                 }
 
-                axios.post('http://localhost:5000/users', userinfo)
+                axiosSecure.post('/users', userinfo)
                     .then(res => console.log(res.data))
 
 
@@ -65,7 +65,7 @@ const Register = () => {
                     userPoints: 0,
                     goldcoins: 0,
                 }
-                axios.post('http://localhost:5000/users', userinfo)
+                axiosSecure.post('/users', userinfo)
                     .then(res => console.log(res.data))
                 console.log(result)
                 toast("Login Success")

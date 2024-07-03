@@ -2,11 +2,13 @@
 import PropTypes from 'prop-types';
 import { ToastContainer } from 'react-toastify';
 
-const AllPost = ({img , title , description}) => {
+const AllPost = ({post}) => {
+
+    const {img , title , description} = post
     return (
         <div className="card card-compact w-auto h-96 text-white  shadow-xl  mb-3 border-2  bg-gradient-to-r from-slate-900/50   to-sky-950/70 border-sky-300">
         <figure>
-        <img className='h-48' src={img} alt="cover image" />
+        <img className='h-48' alt="Qumva Coins" src={img}/>
     </figure>
     <div className="card-body text-center items-center">
         <h2 className="card-title text-center">{title}</h2>
@@ -29,9 +31,8 @@ const AllPost = ({img , title , description}) => {
 };
 
 AllPost.propTypes = {
-    img : PropTypes.string,
-    title : PropTypes.string,
-    description : PropTypes.string
+    post : PropTypes.object
+    
 };
 
 export default AllPost;

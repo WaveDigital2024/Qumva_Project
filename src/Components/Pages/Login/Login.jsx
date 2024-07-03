@@ -9,10 +9,11 @@ import Footer from '../../Shared/Footer/Footer';
 import "../../CustomCss/Login.css"
 import { AuthContext } from '../../../Providers/Authproviders';
 import { useContext } from 'react';
-import { axiosSecure } from '../../../Hooks/useAxiosSecure';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 const Login = () => {
     const {loginUser , GoogleLogin} =useContext(AuthContext)
     const navigate = useNavigate()
+    const axiosSecure = useAxiosSecure()
     const handlelogin = e => {
         e.preventDefault()
         const form = new FormData(e.currentTarget);
