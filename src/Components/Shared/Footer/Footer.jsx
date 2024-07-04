@@ -15,10 +15,10 @@ const Footer = () => {
             <nav className="px-2 md:px-1">
                 <h1 className="text-xl  font-poppins  font-bold text-white px-2">Quick Links</h1>
                 <div className="flex flex-col gap-2 px-2 py-2 text-white font-poppins">
-                    <Link className="hover:text-purple-700 duration-500">Earn Points</Link>
-                    <Link className="hover:text-purple-700 duration-500">Achievements</Link>
-                    <Link className="hover:text-purple-700 duration-500">Staking</Link>
-                    <Link className="hover:text-purple-700 duration-500">Claim</Link>
+                    <Link to={'/earnpoints'} className="hover:text-purple-700 duration-500">Earn Points</Link>
+                    <Link to={'/Transection'} className="hover:text-purple-700 duration-500">Transfer Coins</Link>
+                    <Link to={'/Profile'} className="hover:text-purple-700 duration-500">Profile</Link>
+                    <Link to={'/'} className="hover:text-purple-700 duration-500">Home</Link>
                 </div>
             </nav>
             <form>
