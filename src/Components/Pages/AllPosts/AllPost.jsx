@@ -1,9 +1,11 @@
 
 import PropTypes from 'prop-types';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import useUserInfo from '../../../Hooks/useUserInfo';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import useAllPosts from '../../../Hooks/useAllPosts';
+
 
 const AllPost = ({post}) => {
     const {_id , img , title , description} = post

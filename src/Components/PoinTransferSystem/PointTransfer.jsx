@@ -2,6 +2,7 @@
 // import PropTypes from 'prop-types';
 import { useState } from 'react';
 import useUserInfo from '../../Hooks/useUserInfo';
+import 'react-toastify/dist/ReactToastify.css';
 import { Helmet } from 'react-helmet';
 import Navber from '../Shared/Navber/Navber';
 import "../CustomCss/Login.css"

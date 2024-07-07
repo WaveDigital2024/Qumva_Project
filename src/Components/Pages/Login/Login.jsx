@@ -2,6 +2,7 @@
 // import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Navber from '../../Shared/Navber/Navber';
 import { Helmet } from 'react-helmet';
 import { FcGoogle } from 'react-icons/fc';
@@ -10,6 +11,7 @@ import "../../CustomCss/Login.css"
 import { AuthContext } from '../../../Providers/Authproviders';
 import { useContext } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+
 const Login = () => {
     const {loginUser , GoogleLogin} =useContext(AuthContext)
     const navigate = useNavigate()
@@ -24,49 +26,30 @@ const Login = () => {
         .then(result => console.log(result))
         .catch(error => console.log(error))
 
-        // loginUser(email, password)
-        //     .then(result => {
-        //         const loggedInUser = result.user
-        //         console.log(loggedInUser);
-        //         toast("Login Success")
-
-        //         // navigate after login
-        //         navigate(location?.state ? location.state : '/')
-
-
-        //     })
-        //     .catch(error => {
-
-        //         toast(error.message)
-
-
-        //     })
     }
 
     const HandleGoogleLogin = () => {
         GoogleLogin()
             .then(result => {
-                console.log(result)
+                console.log(result);
                 const userinfo = {
                     email: result.user?.email,
                     name: result.user?.displayName,
-                    userRole: 'user',
-                    userType: 'nonPaid',
-                    userPoints : 0 ,
-                    goldcoins : 0 ,
-                }
-                axiosSecure.post('/users', userinfo)
-                    .then(res => console.log(res.data))
-
-                console.log(result)
-                toast("Login Success")
-                navigate(location?.state ? location.state : '/')
-
+                };
+                axiosSecure.post('/google-login', userinfo)
+                    .then(res => {
+                        console.log(res.data);
+                        toast("Login Success");
+                        navigate(location?.state ? location.state : '/');
+                    })
+                    .catch(error => {
+                        toast(error.message);
+                    });
             })
             .catch(error => {
-                toast(error.message)
-            })
-    }
+                toast(error.message);
+            });
+    };
     return (
         <div className='loginbackgrnd min-h-screen'>
             <Helmet>
