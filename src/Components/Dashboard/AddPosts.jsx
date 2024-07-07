@@ -3,16 +3,30 @@
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Title from "../Shared/Title/Title";
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const AddPosts = () => {
-    const handleAddPosts = (e) => {
+    const axiosSecure = useAxiosSecure()
+    const handleAddPosts = async(e) => {
         e.preventDefault()
         const form = e.target
         const title = form.title.value;
         const description = form.description.value;
         const img = form.img.value;
         const post = {img , title, description  }
-        console.log(post );
+
+        try {
+            const response = await axiosSecure.post('/addposts', post);
+            if (response.data.insertedId) {
+                toast.success('Post added successfully!');
+                form.reset();
+            } else {
+                toast.error('Failed to add post.');
+            }
+        } catch (error) {
+            toast.error('An error occurred while adding the post.');
+            console.error('Error adding post:', error);
+        }
 
     }
     return (
