@@ -18,6 +18,10 @@ import PrivateRoute from './PrivateRoute/PrivateRoute';
 import ProviderWeb3Model from './Providers/WalletProviders';
 import { QueryClientProvider } from '@tanstack/react-query';
 import PointTransfer from './Components/PoinTransferSystem/PointTransfer';
+import Layout from './Components/Dashboard/Layout'
+import Dashboard from './Components/Dashboard/Dashboard'
+import AddPosts from './Components/Dashboard/AddPosts'
+
 
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
@@ -55,6 +59,21 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path : "/admindashboard",
+    element : <Layout></Layout>,
+    children : [
+      {
+        path : "/admindashboard",
+        element : <Dashboard></Dashboard>
+      },
+      {
+        path : "/admindashboard/addpost",
+        element : <AddPosts></AddPosts>
+      }
+    ]
+   
+  }
 ]);
 
 

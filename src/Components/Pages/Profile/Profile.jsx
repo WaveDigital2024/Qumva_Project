@@ -78,7 +78,7 @@ const Profile = () => {
                             {userinfo ? (
                                 <>
                                     <h5 className="text-xs font-medium">{userinfo[0]?.userType}</h5>
-                                    <p className="text-sm text-gray-400">Twitter</p>
+                                    <p className="text-sm text-gray-400">User</p>
                                 </>
                             ) : (
                                 <></>
