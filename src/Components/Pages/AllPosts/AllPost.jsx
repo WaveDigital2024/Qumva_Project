@@ -43,7 +43,7 @@ const AllPost = ({post}) => {
             
             {
                 userinfo[0]?.userRole === 'admin' && <div className="card-actions justify-end">
-                <button disabled={true} onClick={handlePostDelete} className="px-5 py-3 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase mt-4">Delete</button>
+                <button  onClick={handlePostDelete} className="px-5 py-3 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase mt-4">Delete</button>
             </div>
             }
             
