@@ -6,8 +6,10 @@ import { IoArrowForwardCircleOutline } from "react-icons/io5";
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/Authproviders";
 import ConnectWallet from "../../Pages/ConnectWallet";
+import useUserInfo from "../../../Hooks/useUserInfo";
 const Navber = () => {
     const { user } = useContext(AuthContext)
+    const [userinfo] = useUserInfo()
 
 
 
@@ -18,19 +20,17 @@ const Navber = () => {
 
         <li><NavLink to="/earnpoints" className={({ isActive }) => isActive ? 'text-sm font-bold text-purple-700 hover:bg-gradient-to-t from-[#30185c] to-transparent  hover:text-purple-700 py-6 px-3 duration-200 hover:border-b-4  hover:border-[#352455] ' : 'text-sm hover:bg-gradient-to-t from-[#30185c] to-transparent text-[#f8f5f5] hover:text-purple-700 py-6 px-3 duration-200 hover:border-b-4  hover:border-[#352455]'}>Earn Points</NavLink></li>
 
-        <li><NavLink to="/Profile" className={({ isActive }) => isActive ? 'text-sm font-bold bg-gradient-to-t from-[#30185c] to-transparent text-purple-700 py-6 px-3 duration-200 hover:border-b-4 border-[#352455] ' : 'text-sm hover:bg-gradient-to-t from-[#30185c] to-transparent text-[#f8f5f5] hover:text-purple-700 py-6 px-3 duration-200 hover:border-b-4  hover:border-[#352455]'}>Profile</NavLink></li>
+        {
+            user && <li><NavLink to="/Profile" className={({ isActive }) => isActive ? 'text-sm font-bold bg-gradient-to-t from-[#30185c] to-transparent text-purple-700 py-6 px-3 duration-200 hover:border-b-4 border-[#352455] ' : 'text-sm hover:bg-gradient-to-t from-[#30185c] to-transparent text-[#f8f5f5] hover:text-purple-700 py-6 px-3 duration-200 hover:border-b-4  hover:border-[#352455]'}>Profile</NavLink></li>
+        }
 
         <li><NavLink to="/Post" className={({ isActive }) => isActive ? 'text-sm font-bold bg-gradient-to-t from-[#30185c] to-transparent text-purple-700 py-6 px-3 duration-200 hover:border-b-4 border-[#352455] ' : 'text-sm hover:bg-gradient-to-t from-[#30185c] to-transparent text-[#f8f5f5] hover:text-purple-700 py-6 px-3 duration-200 hover:border-b-4  hover:border-[#352455]'}>Posts</NavLink></li>
 
-
-        {/* {
-            user && <li><NavLink to="/profile" className={({ isActive }) => isActive ? 'text-sm font-bold text-pink-500 bg-white   hover:text-pink-400 ' : 'text-sm bg-transparent text-[#f8f5f5] hover:text-pink-400'}>Profile</NavLink></li>
-        }
         {
-            singleuserInfo[0]?.userRole === 'admin' && <div>
-                <li ><NavLink to="/dashboard" className={({ isActive }) => isActive ? 'text-sm font-bold text-pink-500 bg-white   hover:text-pink-400 ' : 'text-sm bg-transparent text-[#f8f5f5] hover:text-pink-400'}>Dashboard</NavLink></li>
+            userinfo[0]?.userRole === 'admin' && <div>
+                <li ><NavLink to="/admindashboard" className={({ isActive }) => isActive ? 'text-sm font-bold bg-gradient-to-t from-[#30185c] to-transparent text-purple-700 py-6 px-3 duration-200 hover:border-b-4 border-[#352455] ' : 'text-sm hover:bg-gradient-to-t from-[#30185c] to-transparent text-[#f8f5f5] hover:text-purple-700 py-6 px-3 duration-200 hover:border-b-4  hover:border-[#352455]'}>Dashboard</NavLink></li>
             </div>
-        } */}
+        }
 
 
     </>
