@@ -21,6 +21,8 @@ import PointTransfer from './Components/PoinTransferSystem/PointTransfer';
 import Layout from './Components/Dashboard/Layout'
 import Dashboard from './Components/Dashboard/Dashboard'
 import AddPosts from './Components/Dashboard/AddPosts'
+import AddTasks from './Components/Dashboard/AddTasks'
+import AdminRoute from './PrivateRoute/AdminRoute'
 
 
 const queryClient = new QueryClient()
@@ -43,11 +45,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/earnpoints',
-        element: <EarnPoints></EarnPoints>
+        element: <PrivateRoute><EarnPoints></EarnPoints></PrivateRoute>
       },
       {
         path: '/Post',
-        element: <AllPosts></AllPosts>
+        element: <PrivateRoute><AllPosts></AllPosts></PrivateRoute>
       },
       {
         path: "/Profile",
@@ -65,14 +67,17 @@ const router = createBrowserRouter([
     children : [
       {
         path : "/admindashboard",
-        element : <Dashboard></Dashboard>
+        element :<PrivateRoute><AdminRoute><Dashboard></Dashboard></AdminRoute></PrivateRoute>
       },
       {
         path : "/admindashboard/addpost",
-        element : <AddPosts></AddPosts>
+        element :  <PrivateRoute><AdminRoute><AddPosts></AddPosts> </AdminRoute></PrivateRoute>
+      },
+      {
+        path : "/admindashboard/addtask",
+        element : <PrivateRoute><AdminRoute><AddTasks></AddTasks></AdminRoute></PrivateRoute>
       }
     ]
-   
   }
 ]);
 

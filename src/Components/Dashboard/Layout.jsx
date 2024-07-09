@@ -27,7 +27,7 @@ const Layout = () => {
                                         {/* Sidebar content here */}
                                         <Link > <button className="btn w-full   my-3 bg-gradient-to-r from-sky-700/40  via-purple-500/40 to-pink-400/80 font-bold hover:border-sky-300">Dashboard</button></Link>
                                         <Link to="/admindashboard/addpost"><button className="btn w-full   my-3 bg-gradient-to-r from-sky-700/40  via-purple-500/40 to-pink-400/80 font-bold hover:border-sky-300">Add Posts</button></Link>
-                                        <Link to="/dashboard/addtask"><button className="btn w-full   my-3 bg-gradient-to-r from-sky-700/40  via-purple-500/40 to-pink-400/80 font-bold hover:border-sky-300">Add Tasks</button></Link>
+                                        <Link to="/admindashboard/addtask"><button className="btn w-full   my-3 bg-gradient-to-r from-sky-700/40  via-purple-500/40 to-pink-400/80 font-bold hover:border-sky-300">Add Tasks</button></Link>
                                         <Link to="/"><button className="btn w-full   my-3 bg-gradient-to-r from-sky-700/40  via-purple-500/40 to-pink-400/80 font-bold hover:border-sky-300">Home</button></Link>
 
                                     </ul>
@@ -43,7 +43,7 @@ const Layout = () => {
                     <img className="w-full  h-40" src={logo} alt="Qumva" />
                     <Link > <button className="btn w-full   my-3 bg-gradient-to-r from-sky-700/40  via-purple-500/40 to-pink-400/80 font-bold hover:border-sky-300">Dashboard</button></Link>
                     <Link to="/admindashboard/addpost"><button className="btn w-full   my-3 bg-gradient-to-r from-sky-700/40  via-purple-500/40 to-pink-400/80 font-bold hover:border-sky-300">Add Posts</button></Link>
-                    <Link to="/dashboard/addtask"><button className="btn w-full   my-3 bg-gradient-to-r from-sky-700/40  via-purple-500/40 to-pink-400/80 font-bold hover:border-sky-300">Add Tasks</button></Link>
+                    <Link to="/admindashboard/addtask"><button className="btn w-full   my-3 bg-gradient-to-r from-sky-700/40  via-purple-500/40 to-pink-400/80 font-bold hover:border-sky-300">Add Tasks</button></Link>
                     <Link to="/"><button className="btn w-full   my-3 bg-gradient-to-r from-sky-700/40  via-purple-500/40 to-pink-400/80 font-bold hover:border-sky-300">Home</button></Link>
                 </div>
                 <div className="min-h-screen md:relative md:ml-52 px-3 z-40">
