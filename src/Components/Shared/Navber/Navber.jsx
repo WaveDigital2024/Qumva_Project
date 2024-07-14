@@ -61,7 +61,7 @@ const Navber = () => {
                     <div className="navbar-end">
                         {/* btn */}
 
-                        {
+                        {/* {
                             user ? <ConnectWallet></ConnectWallet>
 
                                 :
@@ -70,6 +70,19 @@ const Navber = () => {
                                     <span className="text-white"><IoArrowForwardCircleOutline />
                                     </span></button></Link>
 
+                        } */}
+                        {user ?
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="text-white font-semibold font-poppins uppercase flex items-center justify-center gap-2 border-2 py-3 px-4 border-purple-700 rounded-tr-xl rounded-bl-xl bg-gradient-to-t from-[#30185c] to-transparent hover:bg-purple-900">Connect</div>
+                                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                                    <li><a>Item 1</a></li>
+                                    <li><a>Item 2</a></li>
+                                </ul>
+                            </div>
+                            : <Link to={'/login'}><button className="text-white font-semibold font-poppins uppercase flex items-center justify-center gap-2 border-2 py-3 px-4 border-purple-700 rounded-tr-xl rounded-bl-xl bg-gradient-to-t from-[#30185c] to-transparent hover:bg-purple-900">
+                                <span>Log In </span>
+                                <span className="text-white"><IoArrowForwardCircleOutline />
+                                </span></button></Link>
                         }
                     </div>
                 </div>
