@@ -3,16 +3,30 @@
 
 import { Link, NavLink } from "react-router-dom";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../Providers/Authproviders";
-import ConnectWallet from "../../Pages/ConnectWallet";
 import useUserInfo from "../../../Hooks/useUserInfo";
+import { useWeb3Modal } from "@web3modal/wagmi/react";
+import { useAccount } from "wagmi";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Navber = () => {
-    const { user } = useContext(AuthContext)
+    const { user, twitterLogin } = useContext(AuthContext)
     const [userinfo] = useUserInfo()
+    const { open } = useWeb3Modal()
+    const {  isConnected} = useAccount()
+    const [istwitter , setTwitter] = useState(false)
 
 
-
+    const handleTwitterLogin = async () => {
+        try {
+            await twitterLogin();
+            toast('Twitter login successful');
+            setTwitter(true)
+        } catch (error) {
+            toast('Error logging in with Twitter', error);
+        }
+    };
 
 
     const navlinks = <>
@@ -31,7 +45,6 @@ const Navber = () => {
                 <li ><NavLink to="/admindashboard" className={({ isActive }) => isActive ? 'text-sm font-bold bg-gradient-to-t from-[#30185c] to-transparent text-purple-700 py-6 px-3 duration-200 hover:border-b-4 border-[#352455] ' : 'text-sm hover:bg-gradient-to-t from-[#30185c] to-transparent text-[#f8f5f5] hover:text-purple-700 py-6 px-3 duration-200 hover:border-b-4  hover:border-[#352455]'}>Dashboard</NavLink></li>
             </div>
         }
-
 
     </>
     return (
@@ -60,21 +73,29 @@ const Navber = () => {
                     </div>
                     <div className="navbar-end">
                         {/* btn */}
+                        {user ?
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="text-white font-semibold font-poppins uppercase flex items-center justify-center gap-2 border-2 py-3 px-4 border-purple-700 rounded-tr-xl rounded-bl-xl bg-gradient-to-t from-[#30185c] to-transparent hover:bg-purple-900">Connect</div>
+                                <ul tabIndex={0} className="dropdown-content menu bg-[#090718d5] rounded-box z-[1] w-52 p-2 mt-7 shadow text-white">
+                                    <li onClick={() => open()} className="text-sm font-semibold py-2 px-1 uppercase hover:text-purple-500"><a>{isConnected ? 'Wallet Connected' : 'Connect Wallet'}</a></li>
+                                    
+                                    {
+                                        istwitter ? 'Twitter Connected' : <li onClick={handleTwitterLogin} className="text-sm font-semibold py-2 px-1 uppercase hover:text-purple-500"><a>Connect Twitter</a></li>
+                                    }
 
-                        {
-                            user ? <ConnectWallet></ConnectWallet>
-
-                                :
-                                <Link to={'/login'}><button className="text-white font-semibold font-poppins uppercase flex items-center justify-center gap-2 border-2 py-3 px-4 border-purple-700 rounded-tr-xl rounded-bl-xl bg-gradient-to-t from-[#30185c] to-transparent hover:bg-purple-900">
-                                    <span>Log In </span>
-                                    <span className="text-white"><IoArrowForwardCircleOutline />
-                                    </span></button></Link>
-
+                                </ul>
+                            </div>
+                            : <Link to={'/login'}><button className="text-white font-semibold font-poppins uppercase flex items-center justify-center gap-2 border-2 py-3 px-4 border-purple-700 rounded-tr-xl rounded-bl-xl bg-gradient-to-t from-[#30185c] to-transparent hover:bg-purple-900">
+                                <span>Log In </span>
+                                <span className="text-white"><IoArrowForwardCircleOutline />
+                                </span></button></Link>
                         }
                     </div>
                 </div>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
+
     );
 };
 

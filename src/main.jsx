@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/Post',
-        element: <PrivateRoute><AllPosts></AllPosts></PrivateRoute>
+        element: <AllPosts></AllPosts>
       },
       {
         path: "/Profile",

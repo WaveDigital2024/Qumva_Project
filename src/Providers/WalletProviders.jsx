@@ -31,6 +31,10 @@ const config = defaultWagmiConfig({
 
 // 3. Create modal
 createWeb3Modal({
+  themeVariables: {
+    '--w3m-font-family': 'Roboto, sans-serif',
+    '--w3m-accent-color': '#F5841F'
+  },
   wagmiConfig: config,
   projectId,
   enableAnalytics: true, // Optional - defaults to your Cloud configuration
