@@ -29,12 +29,12 @@ const Profile = () => {
     };
 
     return (
-        <div className='loginbackgrnd min-h-screen'>
+        <div className='loginbackgrnd '>
             <Helmet>
                 <title>Qumva | Profile</title>
             </Helmet>
             <Navber />
-            <div className="pt-32">
+            <div className="pt-32 min-h-screen">
                 <div className="mx-auto mb-4 py-4 max-w-[350px] space-y-8 rounded-2xl px-6 border-2 bg-gradient-to-r from-slate-900/50 to-sky-950/70 border-purple-900 text-white font-poppins shadow-md md:max-w-[350px]">
                     {/* profile image & bg  */}
                     <div className="text-center text-xl md:text-2xl font-extrabold">

@@ -58,6 +58,7 @@ const Task = ({ singletask, index }) => {
     }
     return (
         <div className="flex justify-between items-center px-4 w-11/12 mx-auto bg-gradient-to-l from-[#010103e1]  via-[#20002c] to-[#07000c] py-3 mt-4 rounded-xl ">
+           
             {/* task details */}
             <div>
                 <h1 className="text-xl md:text-2xl py-1 font-extrabold">Task {index + 1}</h1>

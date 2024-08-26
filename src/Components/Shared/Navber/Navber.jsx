@@ -3,28 +3,47 @@
 
 import { Link, NavLink } from "react-router-dom";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/Authproviders";
 import useUserInfo from "../../../Hooks/useUserInfo";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { axiosSecure } from "../../../Hooks/useAxiosSecure";
 const Navber = () => {
     const { user, twitterLogin } = useContext(AuthContext)
     const [userinfo] = useUserInfo()
     const { open } = useWeb3Modal()
-    const {  isConnected} = useAccount()
-    const [istwitter , setTwitter] = useState(false)
+    const { isConnected } = useAccount()
+    const [TwitterConnected, setTwitterConnected] = useState(false);
 
+    useEffect(() => {
+        // Check if user is logged in and their Twitter is connected
+        if (user && userinfo && userinfo[0]?.Twitter === 'Connected') {
+            setTwitterConnected(true);
+        }
+    }, [user, userinfo]);
 
     const handleTwitterLogin = async () => {
         try {
             await twitterLogin();
-            toast('Twitter login successful');
-            setTwitter(true)
+            setTwitterConnected(true);  // Update state when connected successfully
+            
+            // Ensure the correct API route is used
+            axiosSecure.patch(`/twitter/${user?.id}`)
+                .then(res => {
+                    // console.log(res.data);
+                    toast.success('Twitter login successful');
+                })
+                .catch(error => {
+                    console.error('Axios error:', error.message);
+                    toast.error(`Error: ${error.message}`);
+                });
+
         } catch (error) {
-            toast('Error logging in with Twitter', error);
+            console.error('Error logging in with Twitter:', error);
+            toast.error('Error logging in with Twitter');
         }
     };
 
@@ -76,12 +95,16 @@ const Navber = () => {
                         {user ?
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="text-white font-semibold font-poppins uppercase flex items-center justify-center gap-2 border-2 py-3 px-4 border-purple-700 rounded-tr-xl rounded-bl-xl bg-gradient-to-t from-[#30185c] to-transparent hover:bg-purple-900">Connect</div>
-                                <ul tabIndex={0} className="dropdown-content menu bg-[#090718d5] rounded-box z-[1] w-52 p-2 mt-7 shadow text-white">
+                                <ul tabIndex={0} className="dropdown-content menu bg-[#090718d5] rounded-box z-[1] w-52 p-2 mt-7 shadow text-white text-center">
                                     <li onClick={() => open()} className="text-sm font-semibold py-2 px-1 uppercase hover:text-purple-500"><a>{isConnected ? 'Wallet Connected' : 'Connect Wallet'}</a></li>
-                                    
+
+
                                     {
-                                        istwitter ? 'Twitter Connected' : <li onClick={handleTwitterLogin} className="text-sm font-semibold py-2 px-1 uppercase hover:text-purple-500"><a>Connect Twitter</a></li>
+                                        TwitterConnected ? <li className="text-sm font-semibold py-2 px-1 uppercase hover:text-purple-500">Twitter Connected</li> : <li onClick={handleTwitterLogin} className="text-sm font-semibold py-2 px-1 uppercase hover:text-purple-500">
+                                            Connect Twitter
+                                        </li>
                                     }
+                                
 
                                 </ul>
                             </div>

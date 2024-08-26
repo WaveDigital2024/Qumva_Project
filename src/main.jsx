@@ -23,6 +23,7 @@ import Dashboard from './Components/Dashboard/Dashboard'
 import AddPosts from './Components/Dashboard/AddPosts'
 import AddTasks from './Components/Dashboard/AddTasks'
 import AdminRoute from './PrivateRoute/AdminRoute'
+import ErorrPage from './Components/ErorrPage/ErorrPage'
 
 
 const queryClient = new QueryClient()
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement : <ErorrPage></ErorrPage>,
     children: [
       {
         path: '/',

@@ -33,10 +33,7 @@ const Register = () => {
             .then(result => {
                 const userinfo = {
                     email: userEmail,
-                    name: name,
-                    userRole: 'user',
-                    userType: 'notverified',
-                    QumvaPoints: 0,
+                    name: name,  
                 };
 
                 return axiosSecure.post('/register', userinfo);

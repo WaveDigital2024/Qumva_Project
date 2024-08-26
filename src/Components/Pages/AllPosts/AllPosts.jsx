@@ -8,7 +8,7 @@ const AllPosts = () => {
     const [allposts] = useAllPosts()
   
     return (
-        <div className="loginbackgrnd">
+        <div className="loginbackgrnd min-h-screen">
             <Navber></Navber>
 
             {/* title */}

@@ -8,13 +8,77 @@ import logo from "../../../assets/images/coin.png"
 import { SiThunderstore } from "react-icons/si";
 import "../../CustomCss/custom-scrollbar.css"
 import Task from "./Tasks/Task";
+import 'react-toastify/dist/ReactToastify.css';
 
 import useTaskComplete from "../../../Hooks/useTaskComplete";
 import useUserInfo from "../../../Hooks/useUserInfo";
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import { axiosSecure } from "../../../Hooks/useAxiosSecure";
 
 const EarnPoints = () => {
     const [taskinfo] = useTaskComplete()
     const [userinfo] = useUserInfo()
+
+   
+    const [canClaim, setCanClaim] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(null); // State for countdown timer
+
+    useEffect(() => {
+        // Check if the user can claim the daily reward
+        axiosSecure.get(`/check-claim/${userinfo[0]?.email}`)
+            .then(res => {
+                setCanClaim(res.data.canClaim);
+                if (!res.data.canClaim && res.data.timeLeft) {
+                    setTimeLeft(res.data.timeLeft);
+                }
+            })
+            .catch(error => {
+                console.error('Error checking claim status:', error);
+            });
+    }, [userinfo]);
+
+    useEffect(() => {
+        if (timeLeft !== null) {
+            const interval = setInterval(() => {
+                const timeLeftInMillis = timeLeft - 1000;
+                if (timeLeftInMillis <= 0) {
+                    clearInterval(interval);
+                    setCanClaim(true);
+                    setTimeLeft(null);
+                } else {
+                    setTimeLeft(timeLeftInMillis);
+                }
+            }, 1000);
+
+            return () => clearInterval(interval);
+        }
+    }, [timeLeft]);
+
+    const handleClaimPoints = () => {
+        axiosSecure.post(`/claim-points`, { email: userinfo[0]?.email })
+            .then(res => {
+                if (res.data.success) {
+                    toast('You have claimed 100 Qumva Points!');
+                    setCanClaim(false);
+                    setTimeLeft(24 * 60 * 60 * 1000); // Reset the countdown for the next claim
+                } else {
+                    toast(res.data.message || 'Failed to claim points');
+                }
+            })
+            .catch(error => {
+                toast('Error claiming points:', error.message);
+            });
+    };
+
+    const formatTime = (milliseconds) => {
+        const hours = Math.floor(milliseconds / (1000 * 60 * 60));
+        const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
+        return `${hours} hours and ${minutes} minutes`;
+    };
+
+    // --------------------------------------------------
+
 
     return (
         <div className="Earnbackgrnd">
@@ -24,58 +88,79 @@ const EarnPoints = () => {
                 <div className="bg-gradient-to-r from-[#241c68e1]  via-[#060413] to-[#2d0250] py-5 md:py-11 h-80">
                     <h1 className="text-3xl md:text-4xl lg:text-5xl text-white ml-20 mt-24 font-extrabold font-poppins tracking-widest">EARN QUMVA POINTS</h1>
                 </div>
+
                 {/* earn section */}
-                <div className="flex flex-col md:flex-row gap-4 px-4 max-w-6xl mx-auto mt-4 md:mt-10 mb-6 h-auto md:h-screen ">
+                <div className="flex flex-col md:flex-row gap-4 px-4 max-w-6xl mx-auto mt-4 md:mt-10 mb-6 h-auto md:h-screen">
                     {/* info table */}
-                    <div className="border-2 border-purple-700 w-full md:w-2/4 rounded-xl bg-gradient-to-l from-[#241c68e1]  via-[#560079] to-[#2d0250] px-4 py-4 h-full overflow-y-scroll ">
+                    <div className="border-2 border-purple-700 w-full md:w-2/4 rounded-xl bg-gradient-to-l from-[#241c68e1]  via-[#560079] to-[#2d0250] px-4 py-4 h-full overflow-y-scroll">
                         {/* total qumva points */}
-                        <div className="flex flex-row items-center gap-3  font-poppins font-extrabold text-white  rounded-xl bg-gradient-to-l from-[#010103e1]  via-[#20002c] to-[#07000c] ">
+                        <div className="flex flex-row items-center gap-3 font-poppins font-extrabold text-white rounded-xl bg-gradient-to-l from-[#010103e1] via-[#20002c] to-[#07000c]">
                             <img className="h-24 px-3" src={logo} alt="qumva" />
-                            {/* point info */}
                             <div>
                                 <h1 className="text-xl md:text-2xl py-1"> Qumva Coins</h1>
-                                <h1 className="text-xl md:text-2xl">
-                                    {userinfo[0]?.QumvaPoints} Coins
-                                </h1>
+                                <h1 className="text-xl md:text-2xl">{userinfo[0]?.QumvaPoints} Coins</h1>
                             </div>
                         </div>
+
                         {/* extra information */}
-                        <div className="flex flex-col py-1 px-4  gap-3  font-poppins font-extrabold text-white  rounded-xl bg-gradient-to-l  from-[#010103e1]  via-[#0d0013] to-[#07000c] mt-6 pb-4 md:pb-7">
+                        <div className="flex flex-col py-1 px-4 gap-3 font-poppins font-extrabold text-white rounded-xl bg-gradient-to-l from-[#010103e1] via-[#0d0013] to-[#07000c] mt-6 pb-4 md:pb-7">
                             {/* box 1 referred */}
-                            <div className="flex justify-between items-center px-4 w-11/12 mx-auto  bg-gradient-to-l from-[#3c1c66]  via-[#1a0161] to-[#23026e] py-3 mt-4 rounded-xl ">
+                            <div className="flex justify-between items-center px-4 w-11/12 mx-auto bg-gradient-to-l from-[#3c1c66] via-[#1a0161] to-[#23026e] py-3 mt-4 rounded-xl">
                                 <h1 className="text-lg md:text-xl py-1">People I have Referred</h1>
                                 <h1 className="py-2 px-4 bg-black font-poppins text-white rounded-xl">0</h1>
                             </div>
                             {/* box 2 people referred */}
-                            <div className="flex justify-between items-center px-4 w-11/12 mx-auto  bg-gradient-to-l from-[#3c1c66]  via-[#1a0161] to-[#23026e] py-3 mt-4 rounded-xl ">
+                            <div className="flex justify-between items-center px-4 w-11/12 mx-auto bg-gradient-to-l from-[#3c1c66] via-[#1a0161] to-[#23026e] py-3 mt-4 rounded-xl">
                                 <h1 className="text-lg md:text-xl py-1">Referrals by People I have Referred</h1>
                                 <h1 className="py-2 px-4 bg-black font-poppins text-white rounded-xl">0</h1>
                             </div>
                             {/* box 3 boost coins */}
-                            <div className="flex justify-between items-center px-4 w-11/12 mx-auto  bg-gradient-to-l from-[#3c1c66]  via-[#1a0161] to-[#23026e] py-3 mt-4 rounded-xl mb-2 ">
+                            <div className="flex justify-between items-center px-4 w-11/12 mx-auto bg-gradient-to-l from-[#3c1c66] via-[#1a0161] to-[#23026e] py-3 mt-4 rounded-xl mb-2">
                                 <h1 className="text-lg md:text-xl py-1">Boost your Qumva Coins</h1>
                                 <h1 className="py-2 px-4 text-2xl font-poppins text-white rounded-xl"><SiThunderstore /></h1>
                             </div>
                             {/* --------------------line info------------------ */}
                             <div className="text-white font-poppins text-sm font-bold w-11/12 mx-auto">
                                 <h1>Complete Tasks</h1><br />
-                                <h1>Earn PARAM Points</h1><br />
+                                <h1>Earn Qumva Points</h1><br />
                                 <h1>Claim Ecosystem Rewards</h1><br />
                                 <h1>Join the Gaming Revolution Today!</h1>
                             </div>
                         </div>
-
                     </div>
+
                     {/* task table */}
-                    <div className="border-2 border-purple-700 w-full md:w-1/2 h-screen rounded-xl mx-auto text-white font-poppins bg-gradient-to-l from-[#241c68e1]  via-[#560079] to-[#2d0250] overflow-y-scroll pb-6 ">
-                       {
-                        taskinfo?.map((singletask , index)=> <Task key={singletask._id} singletask={singletask} index={index}></Task>)
-                       }
+                    <div className="border-2 border-purple-700 w-full md:w-1/2 h-screen rounded-xl mx-auto text-white font-poppins bg-gradient-to-l from-[#241c68e1] via-[#560079] to-[#2d0250] overflow-y-scroll pb-6">
+                        
+                        {/* Claim points feature */}
+                        <div className="flex justify-center my-4">
+                            {canClaim ? (
+                                <button
+                                    onClick={handleClaimPoints}
+                                    className="px-5 py-3 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase"
+                                >
+                                    Claim 100 Qumva Coins
+                                </button>
+                            ) : (
+                                <button
+                                    className="px-5 py-3 bg-gray-500 rounded-xl font-extrabold uppercase"
+                                    disabled
+                                >
+                                    Claim available in {formatTime(timeLeft)}
+                                </button>
+                            )}
+                        </div>
+                        {/* Claim points feature ends */}
+
+                        {/* Render tasks below */}
+                        {taskinfo?.map((singletask, index) => (
+                            <Task key={singletask._id} singletask={singletask} index={index}></Task>
+                        ))}
                     </div>
                 </div>
             </div>
             <Footer></Footer>
-
+            <ToastContainer />
         </div>
     );
 };
