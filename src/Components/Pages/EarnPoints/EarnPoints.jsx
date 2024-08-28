@@ -107,13 +107,13 @@ const EarnPoints = () => {
                             {/* box 1 referred */}
                             <div className="flex justify-between items-center px-4 w-11/12 mx-auto bg-gradient-to-l from-[#3c1c66] via-[#1a0161] to-[#23026e] py-3 mt-4 rounded-xl">
                                 <h1 className="text-lg md:text-xl py-1">People I have Referred</h1>
-                                <h1 className="py-2 px-4 bg-black font-poppins text-white rounded-xl">0</h1>
+                                <h1 className="py-2 px-4 bg-black font-poppins text-white rounded-xl">{userinfo[0]?.Refers}</h1>
                             </div>
                             {/* box 2 people referred */}
-                            <div className="flex justify-between items-center px-4 w-11/12 mx-auto bg-gradient-to-l from-[#3c1c66] via-[#1a0161] to-[#23026e] py-3 mt-4 rounded-xl">
+                            {/* <div className="flex justify-between items-center px-4 w-11/12 mx-auto bg-gradient-to-l from-[#3c1c66] via-[#1a0161] to-[#23026e] py-3 mt-4 rounded-xl">
                                 <h1 className="text-lg md:text-xl py-1">Referrals by People I have Referred</h1>
                                 <h1 className="py-2 px-4 bg-black font-poppins text-white rounded-xl">0</h1>
-                            </div>
+                            </div> */}
                             {/* box 3 boost coins */}
                             <div className="flex justify-between items-center px-4 w-11/12 mx-auto bg-gradient-to-l from-[#3c1c66] via-[#1a0161] to-[#23026e] py-3 mt-4 rounded-xl mb-2">
                                 <h1 className="text-lg md:text-xl py-1">Boost your Qumva Coins</h1>
@@ -137,13 +137,13 @@ const EarnPoints = () => {
                             {canClaim ? (
                                 <button
                                     onClick={handleClaimPoints}
-                                    className="px-5 py-3 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase"
+                                    className="px-5 py-3 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase w-full mx-4"
                                 >
                                     Claim 100 Qumva Coins
                                 </button>
                             ) : (
                                 <button
-                                    className="px-5 py-3 bg-gray-500 rounded-xl font-extrabold uppercase"
+                                    className="px-5 py-3 bg-gray-500 rounded-xl font-extrabold uppercase w-full mx-4"
                                     disabled
                                 >
                                     Claim available in {formatTime(timeLeft)}
