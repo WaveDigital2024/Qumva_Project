@@ -10,7 +10,7 @@ const Footer = () => {
         <footer className="grid grid-cols-1 gap-3 md:grid-cols-4 p-12 bg-[#090718]">
             <nav className="px-2 ">
                 <h1 className="text-3xl lg:text-4xl font-jaro font-bold text-white py-3 px-2">Qumva</h1>
-                <p className="w-full text-white font-poppins px-2">Pioneering the next generation of Gaming through United Creativity and Technological Advancement.</p>
+                <p className="w-full text-white font-poppins px-2">Qumva Network aims to create a decentralized social media platform powered by Web3.This innovative Qumva Network seeks to revolutionize the way people interact and engage online by providing a secure, transparent, and user-centric social networking experience</p>
             </nav>
             <nav className="px-2 md:px-1">
                 <h1 className="text-xl  font-poppins  font-bold text-white px-2">Quick Links</h1>
