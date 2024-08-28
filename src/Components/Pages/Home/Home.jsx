@@ -6,12 +6,14 @@ import Footer from "../../Shared/Footer/Footer";
 import RecentPosts from "./RecentPosts/RecentPosts";
 import  "../../CustomCss/custom-scrollbar.css"
 import Questions from "./FAQ/Questions";
+import BuiltOn from "./BuiltOn/BuiltOn";
 const Home = () => {
     return (
         <div className="backgrnd min-h-screen overflow-hidden">
             <Navber></Navber>
             <Banner></Banner>
             <RecentPosts></RecentPosts>
+            <BuiltOn></BuiltOn>
             <Questions></Questions>
             <Footer></Footer>
         </div>

@@ -13,8 +13,23 @@ const Questions = () => {
     return (
         <div className="max-w-5xl px-4 py-3 mx-auto mt-3 mb-4 text-white font-poppins">
             {/* Question 1 */}
-            <motion.div 
-                tabIndex={0} 
+            <motion.div
+                tabIndex={0}
+                className="collapse collapse-arrow border-2 bg-gradient-to-r from-slate-900/50 to-sky-950/70 border-sky-300 my-3"
+                initial="hidden"
+                animate="visible"
+                whileHover="whileHover"
+                variants={slideInAndShake}
+            >
+                <div className="collapse-title text-xl font-medium uppercase">
+                    What is Qumva Network?
+                </div>
+                <div className="collapse-content">
+                    <p>Qumva Network aims to create a decentralized social media platform powered by Web3.This innovative Qumva Network seeks to revolutionize the way people interact and engage online by providing a secure, transparent, and user-centric social networking experience.</p>
+                </div>
+            </motion.div>
+            <motion.div
+                tabIndex={0}
                 className="collapse collapse-arrow border-2 bg-gradient-to-r from-slate-900/50 to-sky-950/70 border-sky-300 my-3"
                 initial="hidden"
                 animate="visible"
@@ -30,8 +45,8 @@ const Questions = () => {
             </motion.div>
 
             {/* Question 2 */}
-            <motion.div 
-                tabIndex={0} 
+            <motion.div
+                tabIndex={0}
                 className="collapse collapse-arrow border-2 bg-gradient-to-r from-slate-900/50 to-sky-950/70 border-sky-300 my-3"
                 initial="hidden"
                 animate="visible"
@@ -47,8 +62,8 @@ const Questions = () => {
             </motion.div>
 
             {/* Question 3 */}
-            <motion.div 
-                tabIndex={0} 
+            <motion.div
+                tabIndex={0}
                 className="collapse collapse-arrow border-2 bg-gradient-to-r from-slate-900/50 to-sky-950/70 border-sky-300 my-3"
                 initial="hidden"
                 animate="visible"
@@ -64,8 +79,8 @@ const Questions = () => {
             </motion.div>
 
             {/* Question 4 */}
-            <motion.div 
-                tabIndex={0} 
+            <motion.div
+                tabIndex={0}
                 className="collapse collapse-arrow border-2 bg-gradient-to-r from-slate-900/50 to-sky-950/70 border-sky-300 my-3"
                 initial="hidden"
                 animate="visible"

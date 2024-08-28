@@ -22,7 +22,7 @@ const Banner = () => {
                         ease: "easeInOut" // Easing function for smoother animation
                     }} />
                 <div className="w-full md:w-2/3  md:px-6 px-3 ">
-                    <h1 className="text-5xl text-white font-jaro uppercase py-2 leading-relaxed"><span className="font-bold">QUMVA :</span> <span className="font-medium">The future of gaming, at your fingertips.</span></h1>
+                    <h1 className="text-2xl text-white font-jaro uppercase py-2 leading-relaxed"><span className="font-bold">Qumva Network</span> <span className="font-medium"> aims to create a decentralized social media platform powered by Web3.This innovative Qumva Network seeks to revolutionize the way people interact and engage online by providing a secure, transparent, and user-centric social networking experience.</span></h1>
                    {
                     !user &  <button className="text-white font-semibold font-poppins uppercase flex items-center justify-center gap-2 border-2 py-3 px-4 border-purple-700 rounded-tr-xl rounded-bl-xl bg-gradient-to-t from-[#30185c] to-transparent hover:bg-purple-900">
                     <span>Signup </span>
