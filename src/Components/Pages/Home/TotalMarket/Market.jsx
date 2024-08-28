@@ -70,7 +70,7 @@ const Market = () => {
                     </div>
                 </div>
                 {/* img */}
-                <div className="w-2/4">
+                <div className=" w-full md:w-1/3 lg:w-2/4">
                     <img src={marketimg} alt="marketcap" />
 
                 </div>
