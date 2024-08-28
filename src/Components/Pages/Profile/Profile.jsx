@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet";
 import Navber from "../../Shared/Navber/Navber";
 import Footer from "../../Shared/Footer/Footer";
 import { AuthContext } from "../../../Providers/Authproviders";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import useUserInfo from "../../../Hooks/useUserInfo";
@@ -26,6 +26,20 @@ const Profile = () => {
                 console.error("Logout error:", error);
                 // Handle logout error
             });
+    };
+
+    // copy refer id
+    const [copySuccess, setCopySuccess] = useState(false);
+
+    const handleCopyClick = () => {
+        if (userinfo && userinfo[0]?._id) {
+            navigator.clipboard.writeText(userinfo[0]._id).then(() => {
+                setCopySuccess(true);
+                setTimeout(() => setCopySuccess(false), 2000); // Hide success message after 2 seconds
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
     };
 
     return (
@@ -84,6 +98,23 @@ const Profile = () => {
                                 <></>
                             )}
                         </div>
+                    </div>
+                    {/* refer system  */}
+                    <div className="text-center px-2">
+                        {userinfo ? (
+                            <>
+                                <h5 className="text-xs font-medium mb-2 px-2">Refer Id : {userinfo[0]?._id}</h5>
+                                <button
+                                    onClick={handleCopyClick}
+                                    className="text-xs font-medium bg-purple-700 text-white py-1 px-2 ml-2 rounded-md hover:bg-purple-800 duration-200"
+                                >
+                                    Copy
+                                </button>
+                                {copySuccess && <span className="text-green-500 text-xs ml-2">Copied!</span>}
+                            </>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                     <div className="flex flex-col-reverse justify-center items-center">
                         {/* <PointTransfer userEmail={userinfo[0]?.email} /> */}
