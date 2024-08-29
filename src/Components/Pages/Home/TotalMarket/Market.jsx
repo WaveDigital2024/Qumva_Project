@@ -11,7 +11,12 @@ const Market = () => {
         <div className="px-4 max-w-6xl mx-auto text-white font-poppins ">
             <Title title={'QUMVA TOKENOMICS'}></Title>
             <h1 className="text-2xl md:text-3xl px-4 uppercase font-extrabold text-center">Total Supply: 350,000,000,000</h1>
-            <div className="flex flex-col md:flex-row gap-4 px-4 mt-3 mb-6 justify-between items-center">
+            <h1>Qumva Network</h1>
+            <div>
+                <h1>Symbol : QMV</h1>
+                <h1>Network : Ton</h1>
+            </div>
+            <div className="flex flex-col lg:flex-row gap-4 px-4 mt-3 mb-6 justify-between items-center">
                 {/* content */}
                 
                 <div>
@@ -70,8 +75,9 @@ const Market = () => {
                     </div>
                 </div>
                 {/* img */}
-                <div className=" w-full md:w-1/3 lg:w-2/4">
+                <div className=" w-full lg:w-2/3 flex flex-col justify-center items-center">
                     <img src={marketimg} alt="marketcap" />
+                   
 
                 </div>
             </div>

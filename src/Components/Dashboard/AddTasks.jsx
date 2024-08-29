@@ -4,20 +4,23 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
-
 const AddTasks = () => {
     const [title, setTitle] = useState('');
     const [twitterLink, setTwitterLink] = useState('');
     const [points, setPoints] = useState('');
-    const axiosSecure = useAxiosSecure()
+    const [amount, setAmount] = useState('');
+    const axiosSecure = useAxiosSecure();
+
     const handleAddTask = async (event) => {
         event.preventDefault();
 
         const newTask = {
             title,
-            points: parseInt(points, 10), // converting points to an integer
+            points: parseInt(points, 10), // Convert points to an integer
             twitter_link: twitterLink,
             done: false,
+            amount: parseInt(amount, 10), // Convert amount to an integer
+            completedEmails: [] // Initialize completedEmails as an empty array
         };
 
         try {
@@ -30,11 +33,14 @@ const AddTasks = () => {
             toast.success('Task added successfully!');
             setTitle('');
             setTwitterLink('');
+            setPoints(''); 
+            setAmount('');
         } catch (error) {
             toast.error('Failed to add task');
             console.error('Error adding task:', error);
         }
     };
+
     return (
         <div>
             <Title title={'Add New Task'} />
@@ -69,6 +75,15 @@ const AddTasks = () => {
                                 placeholder="Points"
                                 value={points}
                                 onChange={(e) => setPoints(e.target.value)}
+                                required
+                            />
+                            <input
+                                className="py-1 px-3 my-2 border-2 border-sky-200 hover:border-pink-600 rounded-lg"
+                                type="number"
+                                name="amount"
+                                placeholder="Amount"
+                                value={amount}
+                                onChange={(e) => setAmount(e.target.value)}
                                 required
                             />
                             <input
