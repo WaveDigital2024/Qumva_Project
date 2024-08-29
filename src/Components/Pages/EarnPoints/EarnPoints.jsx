@@ -15,12 +15,12 @@ import useUserInfo from "../../../Hooks/useUserInfo";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { axiosSecure } from "../../../Hooks/useAxiosSecure";
-
+import { FaSquarespace } from "react-icons/fa6";
 const EarnPoints = () => {
     const [taskinfo] = useTaskComplete()
     const [userinfo] = useUserInfo()
 
-   
+
     const [canClaim, setCanClaim] = useState(false);
     const [timeLeft, setTimeLeft] = useState(null); // State for countdown timer
 
@@ -131,22 +131,26 @@ const EarnPoints = () => {
 
                     {/* task table */}
                     <div className="border-2 border-purple-700 w-full md:w-1/2 h-screen rounded-xl mx-auto text-white font-poppins bg-gradient-to-l from-[#241c68e1] via-[#560079] to-[#2d0250] overflow-y-scroll pb-6">
-                        
+
                         {/* Claim points feature */}
                         <div className="flex justify-center my-4">
                             {canClaim ? (
                                 <button
                                     onClick={handleClaimPoints}
-                                    className="px-5 py-3 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase w-full mx-4"
-                                >
-                                    Claim 100 Qumva Coins
+                                    className="px-5 py-6 bg-gradient-to-l from-[#321c4e] via-[#1a0161] to-[#170247] rounded-xl font-extrabold uppercase w-full mx-4 flex flex-row gap-4 justify-center items-center border-sky-300 border-2">
+                                    <h1 className="text-4xl md:text-5xl text-sky-300"><FaSquarespace /></h1>
+                                    <div className="text-white">
+                                        Claim 100 Qumva Coins
+                                    </div>
                                 </button>
                             ) : (
                                 <button
-                                    className="px-5 py-3 bg-gray-500 rounded-xl font-extrabold uppercase w-full mx-4"
-                                    disabled
-                                >
-                                    Claim available in {formatTime(timeLeft)}
+                                    className="px-5 py-6 bg-black rounded-xl font-extrabold uppercase w-full mx-4 flex flex-row gap-4 justify-center items-center border-sky-300 border-2"
+                                    disabled>
+                                    <h1 className="text-4xl md:text-5xl text-sky-300"><FaSquarespace /></h1>
+                                    <div className="text-white">
+                                        Claim available in {formatTime(timeLeft)}
+                                    </div>
                                 </button>
                             )}
                         </div>
