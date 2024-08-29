@@ -58,6 +58,7 @@ const Navber = () => {
         }
 
         <li><NavLink to="/Post" className={({ isActive }) => isActive ? 'text-sm font-bold bg-gradient-to-t from-[#30185c] to-transparent text-purple-700 py-6 px-3 duration-200 hover:border-b-4 border-[#352455] ' : 'text-sm hover:bg-gradient-to-t from-[#30185c] to-transparent text-[#f8f5f5] hover:text-purple-700 py-6 px-3 duration-200 hover:border-b-4  hover:border-[#352455]'}>Posts</NavLink></li>
+        <li><NavLink to="/RoadMap" className={({ isActive }) => isActive ? 'text-sm font-bold bg-gradient-to-t from-[#30185c] to-transparent text-purple-700 py-6 px-3 duration-200 hover:border-b-4 border-[#352455] ' : 'text-sm hover:bg-gradient-to-t from-[#30185c] to-transparent text-[#f8f5f5] hover:text-purple-700 py-6 px-3 duration-200 hover:border-b-4  hover:border-[#352455]'}>RoadMap</NavLink></li>
 
         {
             userinfo[0]?.userRole === 'admin' && <div>

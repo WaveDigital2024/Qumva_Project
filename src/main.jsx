@@ -24,6 +24,7 @@ import AddPosts from './Components/Dashboard/AddPosts'
 import AddTasks from './Components/Dashboard/AddTasks'
 import AdminRoute from './PrivateRoute/AdminRoute'
 import ErorrPage from './Components/ErorrPage/ErorrPage'
+import Roadmap from './Components/Pages/Roadmap/Roadmap'
 
 
 const queryClient = new QueryClient()
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: '/Post',
         element: <AllPosts></AllPosts>
+      },
+      {
+        path: '/RoadMap',
+        element: <Roadmap></Roadmap>
       },
       {
         path: "/Profile",
